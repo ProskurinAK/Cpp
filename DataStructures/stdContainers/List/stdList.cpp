@@ -2,6 +2,9 @@
 #include <list>
 using namespace std;
 
+// Список отличается от вектора тем, что в списке быстрее работают функции добавления и удаления элементов, но медленнее происходит перемещение и доступ к конкретному элементу контейнера
+// Так же в контейнере list нет перегруженного оператора [] и доступ к элементам осуществляется по итераторам
+
 int main()
 {
 	srand(time(NULL));
@@ -11,63 +14,93 @@ int main()
 	//list<int> testList;	// Объявление пустого списка
 	//list<int> testList(5);	// Объявления списка из 5 элементов заполненых значением по умолчанию
 	//list<int> testList(5, 2);	// Объявления списка из 5 элементов заполненых значением 2
-	list<int> testList = { 1, 3, 5, 7, 9 };	// Объявление списка заполненного вручную
+	list<int> testList = { 3, 1, 7, 5, 7 };	// Объявление списка заполненного вручную
 
-	// Вывод списка
+	// ------------------------------ добавление и удаление в начале и конце ------------------------------
 
-	/*for (int i : testList)
-	{
-		cout << i << endl;
-	}*/
+	/*testList.push_back(22);
+	testList.push_front(33);
+	testList.pop_back();
+	testList.pop_front();*/
 
-	/*for (auto i = testList.begin(); i != testList.end(); i++)
-	{
-		cout << *i << endl;
-	}*/
-
-	// Размер списка
-
+	// ------------------------------ некоторые функции со списками ------------------------------
+	
+	// функция size() возвращает длинну списка
 	//cout << testList.size() << endl;
 
-	// Изменить размер списка
-
+	// функция resize() изменяет размер списка
 	//testList.resize(3);
-	//testList.resize(10, 7);
+	//testList.resize(10);
 
-	// Изменение элементов списка
+	// функция assign() заменяет элементы списка (ведёт себя по разному в зависимости от переданных параметров)
+	//testList.assign(3, 9);
 
-	//testList.assign(4, 9);
+	/*list<int> testList2{ 12, 8, 147, 32, 0 };
+	testList.assign(testList2.begin(), testList2.end());*/
 
+	// функция swap() заменяет элементы одного массива элементами другого
 	/*list<int> testList2 = { 2, 2, 8 };
 	testList.swap(testList2);*/
 
-	// Добавление элементов
+	// функция сортировки листа по возростанию
+	//testList.sort();
 
-	// Добавление в конец и начало
-	/*testList.push_back(10);
-	testList.push_front(11);
-	testList.emplace_back(22);
-	testList.emplace_front(33);*/
+	// функция unique() удаляет повторяющиеся элементы которые идут подряд и оставляет только один
+	/*testList.push_back(9);
+	testList.push_back(9);
+	testList.push_back(9);
+	testList.unique();*/
 
-	// Добавление элемента по второму индексу
+	// функция reverse() распологает элементы списка в обратном порядке
+	//testList.reverse();
+	
+	// ------------------------------ вставка в список (insert) ------------------------------
+	// функция insert() вставляет новый элемент на позицию на которую указывает переданный итератор
+
 	/*auto iter = testList.begin();
-	testList.insert(++iter, 66);*/
 
-	// Удаление элементов
+	testList.insert(iter, 777);
+	++iter;
+	testList.insert(iter, 333);
 
-	// Удаление первого и последнего элемента
-	/*testList.pop_front();
-	testList.pop_back();*/
+	auto iter2 = testList.begin();
+	advance(iter2, 4);
+	testList.insert(iter2, 58);*/
 
-	// удаление второго элемента
-	/*auto iter = testList.begin();
-	testList.erase(++iter);*/
+	// ------------------------------ удаление из списка (erase) ------------------------------
+	// функция erase() удаляет элемент на позиции на которую указывает переданный итератор
+
+	//auto iter = testList.begin();
+
+	//testList.erase(iter);
+
+	/*++iter;
+	testList.erase(iter);*/
+
+	/*advance(iter, 3);
+	testList.erase(iter);*/
+
+	// ------------------------------ удаление из списка (remove) ------------------------------
+	// функция remove() удаляет все элементы с тем значением, которое мы передали в функцию, если таких элементов нет, то ничего не произойдёт
+
+	//testList.remove(7);
+	
+	//testList.remove(10);
 
 
-	for (int i : testList)
+	// Вывод информации о списке
+
+	for (auto iter = testList.begin(); iter != testList.end(); iter++)
 	{
-		cout << i << endl;
+		cout << *iter << "\t";
 	}
+	cout << endl;
+
+	/*for (int elem : testList)
+	{
+		cout << elem << "\t";
+	}
+	cout << endl;*/
 
 	return 0;
 }
